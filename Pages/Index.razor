@@ -1,3 +1,63 @@
 ﻿@page "/"
 
+<button class="btn btn-primary" type="button" @onclick="Ejecutar">Ejecutar</button>
 
+
+<button class="btn btn-warning" type="button" @onclick="Buscar">Buscar</button>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Date of Birth</th>
+            <th>Height</th>
+            <th>Weigth</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@estudiante.FirstName</td>
+            <td>@estudiante.LastName</td>
+            <td>@estudiante.DateOfBirth</td>
+            <td>@estudiante.Height</td>
+            <td>@estudiante.Weigth</td>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+
+    Students estudiante = new Students();
+
+    private void Ejecutar()
+    {
+        var estudiante = new Students();
+
+        estudiante.FirstName = "Bill";
+        estudiante.LastName = "Gates";
+        estudiante.DateOfBirth = new DateTime(1955, 10, 28);
+        estudiante.Height = 1.77f;
+        estudiante.Weigth = 75;
+
+        var grade = new Grades();
+
+        grade.Section = "History";
+
+        estudiante.GradeId = 1;
+
+        var contexto = new SchoolContext();
+
+        contexto.Grades.Add(grade);
+        contexto.SaveChanges();
+        contexto.Students.Add(estudiante);
+        contexto.SaveChanges();
+        contexto.Dispose();
+    }
+
+    private void Buscar()
+    {
+        //estudiante = StudentsBLL.FirstStudentsByName("Bill");
+        estudiante = StudentsBLL.FirstStudentsByNameRawQuery("Bill");
+    }
+}

@@ -11,7 +11,7 @@ namespace EFCoreTutorials.BLL
     public class StudentsBLL
     {
 
-        public List<Students> StudentsByName(string name)
+        public static List<Students> StudentsByName(string name)
         {
             var context = new SchoolContext();
             var students = context.Students
@@ -21,7 +21,7 @@ namespace EFCoreTutorials.BLL
             return students;
         }
 
-        public Students FirstStudentsByName(string name)
+        public static Students FirstStudentsByName(string name)
         {
             var context = new SchoolContext();
             var student = context.Students
@@ -32,7 +32,7 @@ namespace EFCoreTutorials.BLL
             return student;
         }
 
-        public Students FirstStudentsByNameRawQuery(string name)
+        public static Students FirstStudentsByNameRawQuery(string name)
         {
             var context = new SchoolContext();
             var student = context.Students
